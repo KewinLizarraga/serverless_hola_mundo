@@ -1,0 +1,29 @@
+service: curso-sls-hola-mundo
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-2
+  apiGateway:
+    shouldStartNameWithService: true
+
+plugins:
+  - serverless-offline
+
+functions:
+  hello:
+    handler: handler.hello
+  helloUser:
+    handler: handler.helloUser
+    events:
+      - http:
+          method: GET
+          path: /user/{name}
+  createUser:
+    handler: handler.createUser
+    events:
+      - http:
+          method: POST
+          path: /user
